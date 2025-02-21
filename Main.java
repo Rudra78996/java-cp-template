@@ -67,23 +67,46 @@ public class Main{
         } 
         return -1; 
     }
-    public static int lowerBound(int[] arr, int key) { 
-        int low = 0, high = arr.length; 
-        while (low < high) { 
-            int mid = (low + high) / 2; 
-            if (arr[mid] < key) low = mid + 1; 
-            else high = mid; 
-        } 
-        return low; 
-    }
-    public static int upperBound(int[] arr, int key) {
-        int low = 0, high = arr.length; 
-        while (low < high) { 
-            int mid = (low + high) / 2;
-            if (arr[mid] <= key) low = mid + 1;
-            else high = mid; 
+    // greater or equal to current element(first index)
+    public static int lowerBound(int[] arr, int key) {
+        int low = 0, high = arr.length - 1, ans = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] >= key) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
         }
-        return low; 
+        return ans;
+    }
+
+    // less than or equal to current element(last index)
+    public static int upperBound(int[] arr, int key) {
+        int low = 0, high = arr.length - 1, ans = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] <= key) {
+                ans = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return ans;
+    }
+    public static void sort(int []arr){
+        ArrayList<Integer> al = new ArrayList<>();
+        for(int el:arr)al.add(el);
+        Collections.sort(al);
+        for(int i=0; i<al.size(); i++) arr[i] = al.get(i); 
+    }
+    public static void sort(long []arr){
+        ArrayList<Long> al = new ArrayList<>();
+        for(Long el:arr)al.add(el);
+        Collections.sort(al);
+        for(int i=0; i<al.size(); i++) arr[i] = al.get(i); 
     }
     static class FastReader {BufferedReader br;StringTokenizer st;
         public FastReader() {
@@ -173,9 +196,11 @@ public class Main{
         }
         out.close();
     }
-    // X=============================CODE===============================X //
+     /*
+        CODE
+    */
     
     public static void solve(FastReader sc, FastWriter out) throws Exception {
-        
+         
     }
 }
